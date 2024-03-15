@@ -1,0 +1,325 @@
+% make an article with a4 paper and 12pt font size
+\documentclass[a4paper,12pt]{article}
+\usepackage{adjustbox}
+\usepackage{amsthm}
+\usepackage{amsmath} % Import the amsmath package for \text
+\usepackage{amssymb} % Import the amssymb package for \mathbb
+\usepackage{etoolbox}
+
+\newcounter{definition}[subsection]
+\newenvironment{mydef}{%
+  \refstepcounter{definition}%
+  \textbf{Definição \thesubsection.\thedefinition. }%
+  \ignorespaces
+}{%
+  \par\addvspace{\topsep}
+}
+
+\newcounter{theorem}[subsection]
+\newenvironment{mytheo}{%
+  \refstepcounter{theorem}%
+  \textbf{Teorema \thesubsection.\thetheorem. }%
+  \ignorespaces
+}{%
+  \par\addvspace{\topsep}
+}
+
+\newcounter{corollary}[subsection]
+\newenvironment{corollary}{%
+  \refstepcounter{corollary}%
+  \textbf{Corolário \thecorollary. }%
+  \ignorespaces
+}{%
+  \par\addvspace{\topsep}
+}
+
+
+% make a demonstration environment. Add black square at the end of the demonstration
+\newenvironment{demonstration}{%
+  \par\addvspace{\topsep}
+  \textbf{Demonstração. }%
+  \ignorespaces
+}{%
+  \par\addvspace{\topsep}
+  \hfill $\blacksquare$
+}
+
+% This code ensures that theorem and definition counters are reset with every new section
+\makeatletter
+\@addtoreset{theorem}{subsection}
+\@addtoreset{definition}{subsection}
+\@addtoreset{corollary}{theorem}
+\makeatother
+
+
+\begin{document}
+
+% align right
+\begin{flushleft}
+    \textbf{\large PRÓ-REITORIA DE PESQUISA E PÓS-GRADUAÇÃO}
+    \linebreak
+    \linebreak
+    \textbf{\large COORDENAÇÃO LOCAL DO PROGRAMA DE INICIAÇÃO CIENTÍFICA}
+\end{flushleft}
+
+\begin{center}
+    \textbf{RELATÓRIO}
+
+    \textbf{ANEXO I}
+\end{center}
+
+\section{Resumo}
+
+Neste trabalho pretendemos apresentar um resultado de existência e unicidade de
+solução para um problema envolvendo a equação da onda. Será estudado classes de
+problemas com dados iniciais regulares. Precisamente, consideraremos os dados
+iniciais em espaços de funções m vezes continuamente diferenciáveis. Para isso será
+efetuado levantamento bibliográfico preliminar sobre tópicos de Análise Real e
+Espaços Métricos. Serão estudados aspectos relativos ao espaço das funções
+contínuas com métricas apropriadas. O resultado principal será provado via Séries de
+Fourier.
+
+\section{Objetivos}
+
+\begin{itemize}
+    \item Complementar a formação do discente, visando um perfil científico.
+
+    \item Estudar aspectos relativos aos espaços das funções contínuas, e das funções
+          continuamente diferenciáveis, sob o ponto de vista de espaços métricos.
+
+    \item Provar um teorema que estabeleça condições para a existência de solução
+          para a equação de propagação de ondas acústicas.
+
+    \item Propiciar que o aluno aprenda aspectos teóricos sobre Análise Real, Espaços
+          Métricos e aplicá-los no estudo da equação da onda.
+
+    \item Apresentar os resultados finais no Encontro Anual de Iniciação Científica,
+          Tecnológica e Inovação.
+\end{itemize}
+
+\section{Cronograma de atividades}
+
+% Make a table from september 2023 to August 2024 as colluwns and 5 rows.
+% Add each month as title of the column and the activities as rows.
+
+\begin{adjustbox}{width={\textwidth},totalheight={\textheight},keepaspectratio}%
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Atividades}          & \textbf{Set} & \textbf{Out} & \textbf{Nov} & \textbf{Dez} & \textbf{Jan} & \textbf{Fev} & \textbf{Mar} & \textbf{Abr} & \textbf{Mai} & \textbf{Jun} & \textbf{Jul} & \textbf{Ago} \\
+        \hline
+        Estuda das referências       & X            & X            & X            & X            & X            & X            & X            & X            &              &              &              &              \\
+        \hline
+        Escruta do relatório parcial &              &              &              &              & X            & X            &              &              &              &              &              &              \\
+        \hline
+        Formulação do resultado      &              &              &              &              &              &              & X            & X            & X            & X            &              &              \\
+        \hline
+        Prova do resultado           &              &              &              &              &              &              &              & X            & X            & X            & X            &              \\
+        \hline
+        Escrita do relatório final   &              &              &              &              &              &              &              &              &              & X            & X            & X            \\
+        \hline
+    \end{tabular}
+\end{adjustbox}
+
+
+\section{Materiais e métodos}
+
+\section{Descrição dos principais resultados}
+
+\subsection{Teorema de existência de solução da equação da onda}
+Nesta subseção, apresentaremos definições bases sobre Equações Diferenciais Parciais (EDP), em específico, a equação da onda e o fundamento teórico
+necessário para a prova do teorema de existência e unicidade de solução para o problema de valor inicial e de fronteira (PVIF) associado à equação da onda.
+
+
+\begin{mydef}
+    Uma função $f: \mathbb{R} \to \mathbb{R}$ é \textit{periódica} de período $T$ se, e somente se, $f(x + T) = f(x)$ para todo $x \in \mathbb{R}$.
+\end{mydef}
+
+\begin{mydef}
+    Dada uma série de funções $\sum_{n=1}^{\infty} u_{n}(x)$ onde $u_{n}(x): I \to \mathbb{R}$ \textit{converge pontualmente} se, para cada $x_0 \in I$ fixado,
+    a série numérica $\sum_{n=1}^{\infty} u_{n}(x_0)$ é convergente. Ou seja, dados $\epsilon > 0$ e $x_0 \in I$, existe $N(\epsilon, x_0) \in \mathbb{N}$ tal que
+    \begin{equation}
+        \left| \sum_{j=n}^{m} u_{j}(x_0) \right| < \epsilon
+    \end{equation}
+    para todo $m \geq n \geq N(\epsilon, x_0)$.
+\end{mydef}
+
+\begin{mydef}
+    Dada uma série de funções $\sum_{n=1}^{\infty} u_{n}(x)$ onde $u_{n}(x): I \to \mathbb{R}$ \textit{converge uniformemente} se, para cada $\epsilon > 0$, existe
+    $N(\epsilon) \in \mathbb{N}$ (ou seja, independente de $x \in I$) tal que
+    \begin{equation}
+        \left| \sum_{j=n}^{m} u_{j}(x) \right| < \epsilon
+    \end{equation}
+    para todo $m \geq n \geq N(\epsilon)$ e para todo $x \in I$.
+\end{mydef}
+
+\begin{mytheo}
+    \textbf{Teste M de Weierstrass:} Seja $\sum_{n=1}^{\infty}u_{n}(x)$ uma série de funções $u_{n}: I \to \mathbb{R}$ definidas em um subconjunto $I$ de $\mathbb{R}$. Suponha que existam constantes $M_{n}$ tais que
+    \begin{equation}
+        |u_{n}(x)| \leq M_{n}|, \qquad \text{para todo  }x \in I,
+    \end{equation}
+
+    e que a série numérica $\sum_{n=1}^{\infty}M_{n}$ convirja. Então a série de funções  $\sum_{n=1}^{\infty}u_{n}(x)$ tem convergência uniforme em $I$.
+\end{mytheo}
+
+\begin{mydef}
+    Dada uma função $f: \mathbb{R} \to \mathbb{R}$, periódica, de período $2L$, integrável e absolutamente integrável, podemos expressá-la como uma \textit{série de Fourier}
+    da seguinte forma
+    \begin{equation}
+        f(x) = \frac{1}{2}a_0 + \sum_{n=1}^{\infty} a_{n}\cos\left(\frac{n\pi x}{L}\right) + b_{n}\sin\left(\frac{n\pi x}{L}\right).
+    \end{equation}
+\end{mydef}
+
+\begin{mydef}
+    Dada uma função $f$ que possa se expressa como um série de Fourier, os coeficientes $a_{n}$ e $b_{n}$ são chamados de \textit{coeficientes de Fourier} de $f$ e são dados por
+    \begin{align}
+        a_{n} & = \frac{1}{L}\int_{-L}^{L}f(x)\cos\left(\frac{n\pi x}{L}\right)\, dx; \quad n \geq 0 \\
+        b_{n} & = \frac{1}{L}\int_{-L}^{L}f(x)\sin\left(\frac{n\pi x}{L}\right)\, dx; \quad n \geq 1
+    \end{align}
+\end{mydef}
+
+
+\begin{mydef}
+    A equação da onda é dada pelo Problema de Valor Inicial e de Fronteira (PVIF)
+
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = c^{2}u_{xx}, & \text{em } \mathbb{R}      \\
+            u(0,t) = u(L,t) = 0,  &                            \\
+            u(x, 0) = f(x),       & \text{em } 0 \leq x \leq L \\
+            u_t(x, 0) = g(x),     & \text{em } 0 \leq x \leq L
+        \end{cases}
+    \end{equation}
+\end{mydef}
+
+\begin{mydef}
+    This is the first mydefinition.
+\end{mydef}
+
+\begin{mydef}
+    This is the first mydefinition.
+\end{mydef}
+
+
+\subsection{Conjuntos e funções}
+
+\begin{mydef}
+    This is the first mydefinition.
+\end{mydef}
+
+
+\subsection{Cardinalidade de conjuntos}
+\begin{mydef}
+    Dada um conjunto $\mathbb{N}$ e uma função $s:\mathbb{N} \to \mathbb{N}$, chamamos os elementos
+    desse conjunto de números naturais se, e somente se, $s$ satisfaz os seguintes axiomas \textit{(chamados Axiomas de Peano)}
+    \begin{enumerate}
+        \item $s: \mathbb{N} \to \mathbb{N}$ é uma função injetora.
+        \item $\mathbb{N}\backslash s(\mathbb{N})$ consta de um só elemento; tal elemento é chamado de "um", com símbolo $1$.
+              Ou seja, 1 não é sucessor de nenhum número natural.
+        \item Se $X \subset \mathbb{N}$ é um subconjunto tal que $1 \in \mathbb{N}$ e,
+              para todo $n \in \mathbb{N}$, se $n \in X$, então $s(n) \in X$, então $X = \mathbb{N}$.
+    \end{enumerate}
+\end{mydef}
+
+\begin{mydef}
+    Em $\mathbb{N}$, definimos a adição de dois números naturais como a operação $+$ sobre um par $(m,n)$ da seguinte forma:
+    \begin{enumerate}
+        \item $m + 1 = s(m)$
+        \item $m + s(n) = s(m + n)$, ou seja, $m + (n+1) = (m+n)+1$
+    \end{enumerate}
+\end{mydef}
+
+
+\begin{mydef}
+    Em $\mathbb{N}$, definimos a multiplicação de dois números naturais como a operação $\cdot$ sobre um par $(m,n)$ da seguinte forma:
+    \begin{enumerate}
+        \item $m \cdot 1 = m$
+        \item $m \cdot (n+1) = m\cdot n + m$
+    \end{enumerate}
+\end{mydef}
+
+\begin{mytheo}
+    Sobre as operações de adição e multiplicação de números naturais, temos as seguintes propriedades:
+    \begin{itemize}
+        \item \textit{associatividade}: $(m + n) + p = m + (n + p)$ e $(m \cdot n) \cdot p = m \cdot (n \cdot p)$
+        \item \textit{comutatividade}: $m + n = n + m$ e $m \cdot n = n \cdot m$
+        \item \textit{distributividade}: $m \cdot (n + p) = m \cdot n + m \cdot p$
+        \item \textit{lei do corte}: $m + p = n + p \Rightarrow m = n$ e $m \cdot p = n \cdot p \Rightarrow m = n$
+    \end{itemize}
+\end{mytheo}
+
+\begin{mytheo}
+    \textbf{Princípio da boa-ordenação} Todo subconjunto não vazio $A \subset \mathbb{N}$ possui um menor elemento.
+
+
+    \begin{demonstration}
+        \textbf{DEMONSTRAR}
+    \end{demonstration}
+\end{mytheo}
+
+\begin{mydef}
+    Definimos como o conjunto de inteiros menores ou iguais a $n$ como $I_n = \{ p \in \mathbb{N}; p \leq n \}$.
+\end{mydef}
+
+\begin{mydef}
+    Um conjunto $X$ é dito finito se é vazio ou, então, se existe uma função bijetora $f: I_n \to X$.
+    A bijeção $f$ chama-se \textit{contagem} de $X$ e o número $n$ chama-se \textit{número de elementos} ou \textit{número cardinal} de $X$.
+\end{mydef}
+
+\begin{mytheo}
+    Seja $X$ um conjunto finito e $f:X \to X$ uma função. Então, $f$ é injetora se, e somente se, $f$ é sobrejetora.
+    \begin{demonstration}
+        \textbf{DEMONSTRAR}
+    \end{demonstration}
+\end{mytheo}
+
+\begin{mydef}
+    Definir conjunto limitado
+\end{mydef}
+
+\begin{mytheo}
+    Um subconjunto $X$ de $\mathbb{N}$ é finito se, e somente se, $X$ é limitado.
+\end{mytheo}
+
+\begin{mydef}
+    Um conjunto $X$ é dito infinito se não é finito.
+    Ou seja, $X$ é infinito se, e somente se, não existe uma função bijetora $f: I_n \to X$ para nenhum $n \in \mathbb{N}$.
+\end{mydef}
+
+\begin{mytheo}
+    Se $X$ é um conjunto infinito, então existe uma função injetora $f: \mathbb{N} \to X$.
+
+    \begin{corollary}
+        Um conjunto $X$ é infinito se, e somente se, existe uma bijeção $\psi: X \to Y$ sobre um subconjunto próprio $Y \subset X$.
+    \end{corollary}
+\end{mytheo}
+
+\begin{mydef}
+    Um conjunto $X$ é dito \textit{enumerável} quando é finito ou quando existe uma bijeção $f: \mathbb{N} \to X$.
+    Neste caso, $f$ chama-se \textit{enumeração} de $X$.
+\end{mydef}
+
+\begin{mytheo}
+    Todo subconjunto $X \subset \mathbb{N}$ é enumerável.
+
+    \begin{demonstration}
+        \textbf{DEMONSTRAR}
+    \end{demonstration}
+
+
+    \begin{corollary}
+        O produto cartesiano de dois conjuntos enumeráveis é enumerável.
+    \end{corollary}
+
+\end{mytheo}
+
+
+\subsection{Números reais}
+
+\subsection{Sequências e séries}
+\subsection{Topologia na reta}
+\subsection{Limites de funções}
+
+
+
+\end{document}
