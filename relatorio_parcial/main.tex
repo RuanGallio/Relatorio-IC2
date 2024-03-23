@@ -24,6 +24,15 @@
   \par\addvspace{\topsep}
 }
 
+\newcounter{proposition}[subsection]
+\newenvironment{prop}{%
+  \refstepcounter{proposition}%
+  \textbf{Proposição \thesubsection.\theproposition. }%
+  \ignorespaces
+}{%
+  \par\addvspace{\topsep}
+}
+
 \newcounter{corollary}[subsection]
 \newenvironment{corollary}{%
   \refstepcounter{corollary}%
@@ -48,6 +57,7 @@
 \makeatletter
 \@addtoreset{theorem}{subsection}
 \@addtoreset{definition}{subsection}
+\@addtoreset{proposition}{subsection}
 \@addtoreset{corollary}{theorem}
 \makeatother
 
@@ -123,6 +133,26 @@ Fourier.
 
 
 \section{Materiais e métodos}
+Como trata-se de pesquisa teórica, inicialmente o aluno deverá realizar um
+levantamento bibliográfico de modo a ter subsídios teóricos suficientes para
+demonstrar o resultado principal. Basicamente deve envolver aspectos relativos à
+Análise Real e Espaços Métricos. Para isto, o discente fará estudos individuais das
+referências bibliográficas e deverá apresentar seminários semanais ao orientador.
+Estes seminários serão realizados em sala de aula com a exposição em quadro ou
+remotamente. Além dos encontros nos seminários o aluno deverá se reunir com o
+orientador, sempre que necessário, para discussão e análise dos resultados obtidos.
+
+
+Os estudos preliminares compreenderão uma revisão contendo resultados de
+Análise Real e tópicos preliminares de Espaços Métricos. Isto será feito do um ponto
+de vista teórico e seguirá o contido nas referências White (1993), Lima (1976), Lima
+(1977), Lima (2002), Medeiros et al. (2011), Rudin (1975) e Kreyszig (1978). Um dos
+principais objetivos é estudar aspectos relativos ao espaço das funções contínuas. Tal
+espaço será estudado do ponto de vista de espaços métricos e será explorado suas
+características com diferentes métricas. O segundo principal objetivo é explorar as
+características dos espaços das funções contínuas, e das funções m vezes
+continuamente diferenciáveis, e provar um teorema que garanta a existência de
+solução para um problema de valores iniciais envolvendo a equação da onda.
 
 \section{Descrição dos principais resultados}
 
@@ -193,19 +223,94 @@ necessário para a prova do teorema de existência e unicidade de solução para
 \end{mydef}
 
 \begin{mydef}
-    This is the first mydefinition.
+    Uma função $f: \mathbb{R} \to \mathbb{R}$ é \textit{seccionalmente diferenciável} se ela for seccionalmente contínua e se a sua derivada $f'$ for seccionalmente contínua.
+\end{mydef}
+
+\begin{mytheo}
+    \textbf{Teorema de Fourier:} Seja $f: \mathbb{R} \to \mathbb{R}$ uma função seccionalmente diferenciável de período $2L$. Então, a série de Fourier de $f$ converge em cada ponto $x$ para
+    \begin{equation}
+        \lim_{h \to 0} \frac{1}{2}[f(x+h) + f(x-h)]
+    \end{equation}
+\end{mytheo}
+
+\begin{mydef}
+    Uma função $f: \mathbb{R} \to \mathbb{R}$ é \textit{par} se $f(x) = f(-x)$ para todo $x \in \mathbb{R}$.
 \end{mydef}
 
 \begin{mydef}
-    This is the first mydefinition.
+    Uma função $f: \mathbb{R} \to \mathbb{R}$ é \textit{ímpar} se $f(x) = -f(-x)$ para todo $x \in \mathbb{R}$.
 \end{mydef}
 
+\begin{prop}
+    Seja $f: \mathbb{R} \to \mathbb{R}$ uma função par integrável em qualquer intervalo $[-L, L]$. Então
 
-\subsection{Conjuntos e funções}
+    \begin{equation}
+        \int_{-L}^{L} f(x) \, dx = 2\int_{0}^{L} f(x) \, dx.
+    \end{equation}
 
-\begin{mydef}
-    This is the first mydefinition.
-\end{mydef}
+    Portanto, se $f$ é par e de período $2L$, então os coeficientes de Fourier são dados por
+    \begin{align*}
+        a_n & = \frac{2}{L}\int_{0}^{L}f(x)\cos\left(\frac{n\pi x}{L}\right)\, dx, \\
+        b_n & = 0
+    \end{align*}
+
+\end{prop}
+
+\begin{prop}
+    Seja $f: \mathbb{R} \to \mathbb{R}$ uma função ímpar integrável em qualquer intervalo $[-L, L]$. Então
+
+    \begin{equation}
+        \int_{-L}^{L} f(x) \, dx = 0
+    \end{equation}
+
+    Portanto, se $f$ é ímpar e de período $2L$, então os coeficientes de Fourier são dados por
+    \begin{align*}
+        a_n & = 0,                                                                \\
+        b_n & = \frac{2}{L}\int_{0}^{L}f(x)\sin\left(\frac{n\pi x}{L}\right)\, dx
+    \end{align*}
+
+\end{prop}
+
+\begin{prop}
+    \textbf{Desigualdade de Bessel:} Seja $f: \mathbb{R} \to \mathbb{R}$ uma função quadrado integrável em $[-L, L]$ (ou seja, $\int_{-L}^{L} | f(x) | \, dx $ exista).
+    e $a_n, b_n$ sejam seus coeficientes de Fourier. Então
+    \begin{equation}
+        \frac{1}{2}a^{2}_{n} + \sum_{n=1}^{\infty}(a^{2}_{n} + b^{2}_{n}) \leq \frac{1}{L}\int_{-L}^{L} | f(x) |^{2} \, dx
+    \end{equation}
+\end{prop}
+
+\begin{mytheo}
+    \textbf{Teorema de existência de solução da equação da onda:} Dado o problema de valor inicial e de contorno
+    \begin{equation*}
+        \begin{cases}
+            u_{tt} = c^{2}u_{xx}, & \text{em } \mathbb{R}      \\
+            u(0,t) = u(L,t) = 0,  & t \geq 0                   \\
+            u(x, 0) = f(x),       & \text{em } 0 \leq x \leq L \\
+            u_t(x, 0) = g(x),     & \text{em } 0 \leq x \leq L
+        \end{cases}
+    \end{equation*}
+
+    Sendo $f$ e $g$ funções contínuas em $[0,L]$ tais que $f, f', f''$ e $g, g'$ são contínuas e
+    $f'''$ e $g''$ sejam seccionalmente contínuas. Seja $f(0)=f(L)=f''(0)=g(0)=g(L)=0$ então
+
+    \begin{enumerate}
+        \item $a_n, b_n$ estão bem definidos em
+              \begin{align}
+                  a_n & = \frac{2}{L}\int_{0}^{L}f(x)\cos\left(\frac{n\pi x}{L}\right)\, dx,     \\
+                  b_n & = \frac{2}{n\pi c}\int_{0}^{L}g(x)\sin\left(\frac{n\pi x}{L}\right)\, dx
+              \end{align}
+        \item Ocorre que
+              \begin{align}
+                  f(x) & = \sum_{n=1}^{\infty} a_n \sin\left(\frac{n\pi x}{L}\right)                   \\
+                  g(x) & = \sum_{n=1}^{\infty} \frac{n \pi c}{L} b_n \sin\left(\frac{n\pi x}{L}\right)
+              \end{align}
+        \item A solução do problema é dada por
+              \begin{equation}
+                  u(x,t) = \sum_{n=1}^{\infty} \left[ a_n \cos\left(\frac{n\pi ct}{L}\right) + b_n \sin\left(\frac{n\pi ct}{L}\right) \right] \sin\left(\frac{n\pi x}{L}\right)
+              \end{equation}
+              onde $u(x,t)$ é uma função contínua em $\mathbb{R}$, de classe $C^{2}$.
+    \end{enumerate}
+\end{mytheo}
 
 
 \subsection{Cardinalidade de conjuntos}
@@ -250,11 +355,6 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 \begin{mytheo}
     \textbf{Princípio da boa-ordenação} Todo subconjunto não vazio $A \subset \mathbb{N}$ possui um menor elemento.
-
-
-    \begin{demonstration}
-        \textbf{DEMONSTRAR}
-    \end{demonstration}
 \end{mytheo}
 
 \begin{mydef}
@@ -268,18 +368,16 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 \begin{mytheo}
     Seja $X$ um conjunto finito e $f:X \to X$ uma função. Então, $f$ é injetora se, e somente se, $f$ é sobrejetora.
-    \begin{demonstration}
-        \textbf{DEMONSTRAR}
-    \end{demonstration}
 \end{mytheo}
 
 \begin{mydef}
-    Definir conjunto limitado
+    Um subconjunto $X \subset \mathbb{N}$ é dito \textit{limitado} quando existe $p \in \mathbb{N}$ tal que $x \leq p, \forall x \in X$.
+
+    \begin{corollary}
+        Um subconjunto $X$ de $\mathbb{N}$ é finito se, e somente se, $X$ é limitado.
+    \end{corollary}
 \end{mydef}
 
-\begin{mytheo}
-    Um subconjunto $X$ de $\mathbb{N}$ é finito se, e somente se, $X$ é limitado.
-\end{mytheo}
 
 \begin{mydef}
     Um conjunto $X$ é dito infinito se não é finito.
@@ -302,11 +400,6 @@ necessário para a prova do teorema de existência e unicidade de solução para
 \begin{mytheo}
     Todo subconjunto $X \subset \mathbb{N}$ é enumerável.
 
-    \begin{demonstration}
-        \textbf{DEMONSTRAR}
-    \end{demonstration}
-
-
     \begin{corollary}
         O produto cartesiano de dois conjuntos enumeráveis é enumerável.
     \end{corollary}
@@ -315,9 +408,213 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 
 \subsection{Números reais}
+\begin{mydef}
+    Uma terna $(K, +, \cdot)$ onde $K$ é um conjunto e $+, \cdot$ são operações é um \textit{corpo} se, e somente se, satisfaz as seguintes propriedades:
+
+    \begin{enumerate}
+        \item \textit{Associatividade:} para todo $a, b, c \in K$, temos que $(a + b) + c = a + (b + c)$ e $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+        \item \textit{Comutatividade:} para todo $a, b \in K$, temos que $a + b = b + a$ e $a \cdot b = b \cdot a$.
+        \item \textit{Elemento neutro:} existem $0, 1 \in K$ tais que $a + 0 = a$ e $a \cdot 1 = a$ para todo $a \in K$.
+        \item \textit{Distributividade:} para todo $a, b, c \in K$, temos que $a \cdot (b + c) = a \cdot b + a \cdot c$.
+        \item Todo $a \in K$ possui um \textit{oposto} $-a$ tal que $a + (-a) = 0$.
+        \item Todo $a \in K \backslash \{0\}$ possui um \textit{inverso} $a^{-1}$ tal que $a \cdot a^{-1} = 1$.
+    \end{enumerate}
+\end{mydef}
+
+\begin{mydef}
+    Um corpo $(K, +, \cdot)$ é dito \textit{ordenado} se existe um subconjunto $P \subset K$, chamado de conjunto dos elementos positivos, tal que
+    \begin{enumerate}
+        \item A soma de dois elementos positivos é um elemento positivo: $a, b \in P \Rightarrow a + b \in P$ e $a, b \in P \Rightarrow a \cdot b \in P$.
+        \item Dado $a \in K$ existem três possibilidades: $a \in P$, ou $-a \in P$ ou $a = 0$.
+    \end{enumerate}
+\end{mydef}
+
+\begin{mydef}
+    Em um corpo ordenado $(K, +, \cdot)$, podemos definir uma relação de ordem $<$ e dizemos que \textit{x é menor que y} se $x<y \iff y - x \in P$.
+\end{mydef}
+
+
+\begin{mydef}
+    Dado um corpo ordenado $(K, +, \cdot)$, definimos como \textit{valor absoluto (ou módulo)} de um elemento $a \in K$ como $|0| =0$ e $|a| = a$ se
+    $a \in P$ e $|a| = -a$ se $-a \in P$.
+\end{mydef}
+
+\begin{mydef}
+    Dado um corpo ordenado $(K, +, \cdot)$, um subconjunto $A \subset K$ é dito \textit{limitado superiormente} se existe $M \in K$ tal que $a \leq M$ para todo $a \in A$.
+    Nesse caso dizemos que $M$ é uma \textit{cota superior} de $A$.
+
+    Analogamente se define um conjunto \textit{limitado inferiormente} e \textit{cota inferior}.
+\end{mydef}
+
+
+\begin{mydef}
+    Dado um corpo ordenado $(K, +, \cdot)$, um subconjunto $A \subset K$, dizemos que $a \in A$ é o \textit{supremo}  de $A$ se
+    \begin{enumerate}
+        \item $a$ é uma cota superior de $A$.
+        \item Se $b$ é uma cota superior de $A$, então $a \leq b$.
+    \end{enumerate}
+    Ou seja, $a$ é o menor dos limitantes superiores de $A$ e denotamos $a = \sup A$.
+
+    Analogamente, definimos o \textit{ínfimo} de $A$, denotado por $\inf A$.
+\end{mydef}
+
+\begin{mydef}
+    Dado um corpo ordenado $(K, +, \cdot)$, dizemos que tal corpo é \textit{completo} se, e somente se, todo subconjunto não vazio $A \subset K$ que é limitado superiormente possui um supremo.
+\end{mydef}
+
+\begin{mydef}
+    Tomamos por axioma a existência de um corpo ordenado completo $(\mathbb{R}, +, \cdot)$, chamado de \textit{corpo dos números reais}.
+\end{mydef}
+
+\begin{mytheo}
+    \textbf{Desigualdade de Bernoulli:} Para todo $x \in \mathbb{R}, x \geq -1$ e todo $n \in \mathbb{N}$, temos que $(1+x)^n \geq 1 + nx$.
+\end{mytheo}
+
+\begin{mytheo}
+    \textbf{Desigualdade triangular:}Se $x,y \in \mathbb{R}$ então $|x+y| \leq |x| + |y|$.
+\end{mytheo}
+
+\begin{mytheo}
+    \textbf{Teorema dos subintervalor encaixados:} Dada uma sequência de intervalos limitados e fechados $I_1 \subset I_2 \subset \ldots \subset I_n \subset \ldots$,
+    $I_n = [a_n, b_n]$ então existe um número real $c$ tal que $c \in I_n$ para todo $n \in \mathbb{N}$.
+\end{mytheo}
+
+\begin{mytheo}
+    O conjunto dos números reais não é enumerável.
+\end{mytheo}
 
 \subsection{Sequências e séries}
+
+\begin{mydef}
+    Uma sequência de números reais é uma função $x: \mathbb{N} \to \mathbb{R}$ que associa a cada $n \in \mathbb{N}$ um número real $x_n$.
+    Denota-se a sequência por $(x_n)$ ou $(x_n)_{n \in \mathbb{N}}$.
+\end{mydef}
+
+\begin{mydef}
+    Uma sequência $(x_n)$ é dita \textit{limitada superiormente} se existe $M \in \mathbb{R}$ tal que $x_n \leq M$ para todo $n \in \mathbb{N}$.
+
+    Analogamente, definimos uma sequência \textit{limitada inferiormente}.
+\end{mydef}
+
+\begin{mydef}
+    Dizemos que o número real $a$ é limite da sequência $(x_n)$ se, e somente se, para todo $\epsilon > 0$ existe $N \in \mathbb{N}$ tal que
+    $|x_n - a| < \epsilon$ para todo $n \geq N$.
+
+    Ou seja,
+    \begin{equation}
+        \lim_{n \to \infty} x_n = a \iff \forall \epsilon > 0, \exists N \in \mathbb{N} \text{ tal que } n \geq N \implies |x_n - a| < \epsilon.
+    \end{equation}
+\end{mydef}
+
+\begin{mydef}
+    Uma sequência $(x_n)$ é dita \textit{convergente} se existe um número real $a$ tal que $\lim_{n \to \infty} x_n = a$, caso contrário, dizemos que a sequência é \textit{divergente}.
+\end{mydef}
+
+\begin{mytheo}
+    \textbf{Unicidade do limite:} Se a sequência $(x_n)$ é convergente, então o limite é único.
+\end{mytheo}
+
+\begin{mydef}
+    Dada uma sequência $(x_n)$, definimos como subsequência a restrinção de $(x_n)$ a um subconjunto infinito de $\mathbb{N}' \subset \mathbb{N}$ onde
+    $\mathbb{N}' = \{ n_1 < n_2 < \ldots < n_k < \ldots \}$. Escrevemos $(x_{n})_{n \in \mathbb{N}'}$.
+\end{mydef}
+
+\begin{mytheo}
+    Seja $(x_n)$ uma sequência onde $\lim x_n = a$, etão toda subsequência de $(x_n)$ também converge para $a$.
+\end{mytheo}
+
+\begin{mytheo}
+    Toda sequência convergente é limitada.
+\end{mytheo}
+
+\begin{mydef}
+    Uma sequencia $(x_n)$ é dita \textit{monótona} se $x_{n+1} \geq x_n$ para todo $n \in \mathbb{N}$.
+\end{mydef}
+
+
+\begin{mytheo}
+    Toda sequência monótona e limitada é convergente.
+\end{mytheo}
+
+\begin{mytheo}
+    \textbf{Teorema de Bolzano-Weierstrass:} Toda sequência limitada possui uma subsequência convergente.
+\end{mytheo}
+
+\begin{mytheo}
+    Seja $(x_n)$ uma sequencia monótona que possui uma subsequência $(x_k)_{k \in \mathbb{N}'}$ convergente. Então, a sequência $(x_n)$ também é convergente.
+\end{mytheo}
+
+
+\begin{mytheo}
+    \textbf{Teorema do sanduíche:} Sejam $(x_n), (y_n), (z_n)$ sequências de números reais tais que $x_n \leq y_n \leq z_n$ para $n \in \mathbb{N}$ suficientemente grande.
+    Se $\lim x_n = \lim z_n = a$, então $\lim y_n = a$.
+\end{mytheo}
+
 \subsection{Topologia na reta}
+
+\begin{mydef}
+    Dado um conjunto $X \subset \mathbb{R}$, um ponto $a \in X$ é dito ponto interior de $X$ quando existe $\epsilon >0$ tal que
+    o intervalo aberto $(a-\epsilon, a+\epsilon) \subset X$.
+
+    O conjunto dos pontos interiores de $X$ chama-se \textit{interior} de $X$ e é denotado por $\text{int}(X)$.
+\end{mydef}
+
+\begin{mydef}
+    Um conjunto $X \subset \mathbb{R}$ é dito \textit{aberto} se todo ponto de $X$ é um ponto interior de $X$. Ou seja, $X = \text{int}(X)$.
+\end{mydef}
+
+\begin{mydef}
+    Dado $X \subset \mathbb{R}$ e $a \in X$, dizemos que $a$ é ponto aderente de $X$ se, e somente se, $\exists (x_n) \subset X$ tal que $\lim x_n = a$.
+
+    Note que todo ponto $b$ de $X$ é um ponto aderente de $X$, pois podemos tomar a sequência constante $x_n = b$ para todo $n \in \mathbb{N}$.
+
+    Chama-se \textit{fecho} de $X$ o conjunto dos pontos aderentes de $X$ e é denotado por $\overline{X}$ e tem-se $X \subset \overline{X}$.
+\end{mydef}
+
+\begin{mydef}
+    Um conjunto $X \subset \mathbb{R}$ é dito \textit{fechado} se $\overline{X} = X$. Ou seja, $X$ contém todos os seus pontos aderentes.
+\end{mydef}
+
+\begin{mydef}
+    Dado $\epsilon \in \mathbb{R}, \epsilon >0$, definimos o \textit{bola aberta} de raio $\epsilon$ centrada em $a$ como o conjunto $B(a, \epsilon) = \{ x \in \mathbb{R}; |x-a| < \epsilon \}$.
+
+    Dizemos que $B(a, \epsilon)$ é uma vizinhança de $a$.
+\end{mydef}
+
+\begin{mytheo}
+    Um ponto $a$ é ponto aderente de $X$ se, e somente se, toda vizinhança de $a$ contém um ponto de $X$.
+\end{mytheo}
+
+
+\begin{mytheo}
+    Um conjunto $F \subset \mathbb{R}$ é fechado se, e somente se, seu complementar $A = \mathbb{R} \backslash F$ é aberto.
+\end{mytheo}
+
+\begin{mydef}
+    Um ponto $a \in \mathbb{R}$ é \textit{ponto de acumulação} de um conjunto $X \subset \mathbb{R}$ se, e somente se, toda vizinhança
+    de $a$ contém algum ponto de $X$ diferente de $a$.
+
+    Se $a$ não é ponto de acumulação de $X$, então $a$ é um \textit{ponto isolado} de $X$.
+\end{mydef}
+
+\begin{mytheo}
+    Dados $X \subset \mathbb{R}$ e $a \in \mathbb{R}$, as seguintes afirmações são equivalentes:
+    \begin{enumerate}
+        \item $a$ é ponto de acumulação de $X$.
+        \item Existe uma sequência $(x_n) \subset X\backslash \{a\}$ tal que $\lim x_n = a$.
+        \item Toda vizinhança de $a$ contém infinitos pontos de $X$.
+    \end{enumerate}
+\end{mytheo}
+
+
+\begin{mydef}
+    Um conjunto $X \subset \mathbb{R}$ é dito \textit{compacto} quando é limitado e fechado.
+\end{mydef}
+
+\begin{mytheo}
+    Um conjunto $X \subset \mathbb{R}$ é compacto se, e somente se, toda sequência $(x_n) \subset X$ possui uma subsequência convergente para um ponto de $X$.
+\end{mytheo}
+
 \subsection{Limites de funções}
 
 
