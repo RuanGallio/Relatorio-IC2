@@ -314,6 +314,13 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 
 \subsection{Cardinalidade de conjuntos}
+
+
+Nesta subseção, definiremos os conceitos de conjuntos finitos e infinitos, e apresentaremos os conceitos de cardinalidade de conjuntos e, com isso, a distinção
+entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremos como partida o conjunto dos números naturais $\mathbb{N}$.
+
+\vskip 0.5cm
+
 \begin{mydef}
     Dada um conjunto $\mathbb{N}$ e uma função $s:\mathbb{N} \to \mathbb{N}$, chamamos os elementos
     desse conjunto de números naturais se, e somente se, $s$ satisfaz os seguintes axiomas \textit{(chamados Axiomas de Peano)}
@@ -408,6 +415,13 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 
 \subsection{Números reais}
+
+Nesta subseção, exibiremos as definições de corpo, corpo ordenado e corpo ordenado completo, e, em seguida,
+exibiremos um axioma que garante a existência de um corpo ordenado completo, chamado de corpo dos números reais, e apresentaremos algumas de suas propriedades
+e teoremas relacionados com tal corpo.
+
+\vskip 0.5cm
+
 \begin{mydef}
     Uma terna $(K, +, \cdot)$ onde $K$ é um conjunto e $+, \cdot$ são operações é um \textit{corpo} se, e somente se, satisfaz as seguintes propriedades:
 
@@ -483,7 +497,14 @@ necessário para a prova do teorema de existência e unicidade de solução para
     O conjunto dos números reais não é enumerável.
 \end{mytheo}
 
-\subsection{Sequências e séries}
+\subsection{Sequências} \label{sec:seq}
+
+Aqui será apresentada a definição de sequência de números reais e a noção de limite em sua forma mais simples, sendo o limite de uma sequência.
+Assim, definiremos os conceitos de sequências convergentes, divergentes e sequências de Cauchy. Em seguida, apresentaremos alguns teoremas relacionados com tais conceitos.
+
+
+\vskip 0.5cm
+
 
 \begin{mydef}
     Uma sequência de números reais é uma função $x: \mathbb{N} \to \mathbb{R}$ que associa a cada $n \in \mathbb{N}$ um número real $x_n$.
@@ -528,7 +549,7 @@ necessário para a prova do teorema de existência e unicidade de solução para
 \end{mytheo}
 
 \begin{mydef}
-    Uma sequencia $(x_n)$ é dita \textit{monótona} se $x_{n+1} \geq x_n$ para todo $n \in \mathbb{N}$.
+    Uma sequência $(x_n)$ é dita \textit{monótona} se $x_{n+1} \geq x_n$ para todo $n \in \mathbb{N}$.
 \end{mydef}
 
 
@@ -541,7 +562,7 @@ necessário para a prova do teorema de existência e unicidade de solução para
 \end{mytheo}
 
 \begin{mytheo}
-    Seja $(x_n)$ uma sequencia monótona que possui uma subsequência $(x_k)_{k \in \mathbb{N}'}$ convergente. Então, a sequência $(x_n)$ também é convergente.
+    Seja $(x_n)$ uma sequência monótona que possui uma subsequência $(x_k)_{k \in \mathbb{N}'}$ convergente. Então, a sequência $(x_n)$ também é convergente.
 \end{mytheo}
 
 
@@ -550,7 +571,31 @@ necessário para a prova do teorema de existência e unicidade de solução para
     Se $\lim x_n = \lim z_n = a$, então $\lim y_n = a$.
 \end{mytheo}
 
+
+\begin{mydef}
+    Uma sequência $(x_n)$ é dita \textit{de Cauchy} se, para todo $\epsilon > 0$ existe $N \in \mathbb{N}$ tal que $|x_n - x_m| < \epsilon$ para todo $n, m \geq N$.
+\end{mydef}
+
+
+\begin{mytheo}
+    Toda sequência convergente é de Cauchy.
+
+    \begin{corollary}
+        Toda sequência de Cauchy é limitada.
+    \end{corollary}
+
+\end{mytheo}
+
+
+\begin{mytheo}
+    Toda sequência de Cauchy de números reais é convergente.
+\end{mytheo}
+
 \subsection{Topologia na reta}
+
+Em seguida, apresentaremos conceitos básicos relacionados à topologia dos números reais. A topologia é uma área da matemática que estuda as propriedades de conjuntos.
+Dessa forma, definiremos conceitos como conjuntos abertos, fechados, ponto interior, ponto aderente, ponto de acumulação, vizinhança e conjuntos compactos.
+
 
 \begin{mydef}
     Dado um conjunto $X \subset \mathbb{R}$, um ponto $a \in X$ é dito ponto interior de $X$ quando existe $\epsilon >0$ tal que
@@ -617,6 +662,43 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 \subsection{Limites de funções}
 
+Finalmente, expandiremos o conceito de limite apresentado na seção \ref{sec:seq} para funções reais de variável real.
 
+\vskip 0.5cm
+
+
+\begin{mydef}
+    Seja $X \subset \mathbb{R}$, $f: X \to \mathbb{R}$ uma função e $a \in X'$ ponto de acumulação de $X$. Dizemos que $L \in \mathbb{R}$ é o \textit{limite de $f(x)$
+        quando $x$ tende à $a$} se, e somente se, para todo $\epsilon > 0$ existe $\delta > 0$ tal que $x \in X$ e $0 < |x-a| < \delta \Rightarrow |f(x) - L| < \epsilon$.
+
+    Simbolicamente, temos
+    \begin{equation}
+        \lim_{x \to a} f(x) = L \iff \forall \epsilon > 0, \exists \delta > 0; x \in X,\quad  0 < |x-a| < \delta \implies |f(x) - L| < \epsilon.
+    \end{equation}
+\end{mydef}
+
+\begin{mytheo}
+    Sejam $f,g: X \to \mathbb{R}, a \in X', \lim_{x \to a} f(x) =L$ e $\lim_{x \to a} g(x) = M$. Se $L < M$ então existe $\delta > 0$ tal que
+    $x \in X, 0 < |x-a| < \delta \implies f(x) < g(x)$.
+\end{mytheo}
+
+\begin{mytheo}
+    \textbf{Teorema do sanduíche para funções:} Sejam $f,g,h: X \to \mathbb{R}, a \in X'$ e $\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L$.
+    Se $f(x) \leq g(x) \leq h(x)$ para $x \in X\backslash\{a\}$, então $\lim_{x \to a} g(x) = L$.
+\end{mytheo}
+
+\begin{mytheo}
+    Sejam $f:X \to \mathbb{R}, a \in X'$. Para que $\lim_{x \to a}f(x) = L$ é necessário e suficiente que, para toda sequência $(x_n) \subset X\backslash\{a\}$ tal que
+    $\lim x_n = a$, tem-se $\lim f(x_n) = L$.
+\end{mytheo}
+
+\begin{mytheo}
+    \textbf{Unicidade do limite:} Sejam $f: X \to \mathbb{R}, a \in X'$. Se $\lim_{x \to a} f(x) = L$ e $\lim_{x \to a} f(x) = M$, então $L = M$.
+\end{mytheo}
+
+\begin{mytheo}
+    Sejam $f: X \to \mathbb{R}, a \in X'$. Se existe $\lim_{x \to a} f(x)$ então $f$ é limitada em uma vizinhança de $a$.
+    Ou seja, existem $M > 0$ e $\delta > 0$ tal que $x \in X, 0 < |x-a| < \delta \implies |f(x)| \leq M$.
+\end{mytheo}
 
 \end{document}
