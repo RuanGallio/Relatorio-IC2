@@ -1,6 +1,8 @@
 % make an article with a4 paper and 12pt font size
 \documentclass[a4paper,12pt]{article}
 \usepackage{adjustbox}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
 \usepackage{amsthm}
 \usepackage{amsmath} % Import the amsmath package for \text
 \usepackage{amssymb} % Import the amssymb package for \mathbb
@@ -8,6 +10,7 @@
 
 \newcounter{definition}[subsection]
 \newenvironment{mydef}{%
+  \noindent
   \refstepcounter{definition}%
   \textbf{Definição \thesubsection.\thedefinition. }%
   \ignorespaces
@@ -16,27 +19,34 @@
 }
 
 \newcounter{theorem}[subsection]
-\newenvironment{mytheo}{%
-  \refstepcounter{theorem}%
-  \textbf{Teorema \thesubsection.\thetheorem. }%
-  \ignorespaces
+\newenvironment{mytheo}[1][]{%
+    \noindent
+    \stepcounter{theorem}%
+    \ifstrempty{#1}%
+        {\textbf{Teorema \thesubsection.\thetheorem. }\itshape}%
+        {\textbf{Teorema \thesubsection.\thetheorem. (#1) }\itshape}%
+    \ignorespaces
 }{%
-  \par\addvspace{\topsep}
+    \par\addvspace{\topsep}
 }
 
 \newcounter{proposition}[subsection]
-\newenvironment{prop}{%
+\newenvironment{prop}[1][]{%
+  \noindent
   \refstepcounter{proposition}%
-  \textbf{Proposição \thesubsection.\theproposition. }%
-  \ignorespaces
+    \ifstrempty{#1}%
+        {\textbf{Proposição \thesubsection.\theproposition. }\itshape}%
+        {\textbf{Proposição \thesubsection.\theproposition. (#1) }\itshape}%
+    \ignorespaces
 }{%
   \par\addvspace{\topsep}
 }
 
 \newcounter{corollary}[subsection]
 \newenvironment{corollary}{%
+  \noindent
   \refstepcounter{corollary}%
-  \textbf{Corolário \thecorollary. }%
+  \textbf{Corolário \thecorollary. }\itshape%
   \ignorespaces
 }{%
   \par\addvspace{\topsep}
@@ -61,7 +71,6 @@
 \@addtoreset{corollary}{theorem}
 \makeatother
 
-
 \begin{document}
 
 % align right
@@ -72,13 +81,13 @@
     \textbf{\large COORDENAÇÃO LOCAL DO PROGRAMA DE INICIAÇÃO CIENTÍFICA}
 \end{flushleft}
 
-\begin{center}
-    \textbf{RELATÓRIO}
+\vspace{1cm}
 
-    \textbf{ANEXO I}
-\end{center}
+\section{Descrição do projeto}
 
-\section{Resumo}
+\subsection{Resumo}
+\paragraph*{}
+
 
 Neste trabalho pretendemos apresentar um resultado de existência e unicidade de
 solução para um problema envolvendo a equação da onda. Será estudado classes de
@@ -89,7 +98,7 @@ Espaços Métricos. Serão estudados aspectos relativos ao espaço das funções
 contínuas com métricas apropriadas. O resultado principal será provado via Séries de
 Fourier.
 
-\section{Objetivos}
+\subsection{Objetivos}
 
 \begin{itemize}
     \item Complementar a formação do discente, visando um perfil científico.
@@ -107,7 +116,7 @@ Fourier.
           Tecnológica e Inovação.
 \end{itemize}
 
-\section{Cronograma de atividades}
+\subsection{Cronograma de atividades}
 
 % Make a table from september 2023 to August 2024 as colluwns and 5 rows.
 % Add each month as title of the column and the activities as rows.
@@ -132,14 +141,16 @@ Fourier.
 \end{adjustbox}
 
 
-\section{Materiais e métodos}
-Como trata-se de pesquisa teórica, inicialmente o aluno deverá realizar um
+\subsection{Materiais e métodos}
+\paragraph*{}
+
+Como trata-se de pesquisa teórica, inicialmente realizamos um
 levantamento bibliográfico de modo a ter subsídios teóricos suficientes para
 demonstrar o resultado principal. Basicamente deve envolver aspectos relativos à
-Análise Real e Espaços Métricos. Para isto, o discente fará estudos individuais das
-referências bibliográficas e deverá apresentar seminários semanais ao orientador.
-Estes seminários serão realizados em sala de aula com a exposição em quadro ou
-remotamente. Além dos encontros nos seminários o aluno deverá se reunir com o
+Análise Real e Espaços Métricos. Para isto, o fiz estudos individuais das
+referências bibliográficas e apresentei seminários semanais ao orientador.
+Estes seminários foram realizados em sala de aula com a exposição em quadro ou
+remotamente. Além dos encontros nos seminários me reuni com o
 orientador, sempre que necessário, para discussão e análise dos resultados obtidos.
 
 
@@ -150,14 +161,23 @@ de vista teórico e seguirá o contido nas referências White (1993), Lima (1976
 principais objetivos é estudar aspectos relativos ao espaço das funções contínuas. Tal
 espaço será estudado do ponto de vista de espaços métricos e será explorado suas
 características com diferentes métricas. O segundo principal objetivo é explorar as
-características dos espaços das funções contínuas, e das funções m vezes
+características dos espaços das funções contínuas, e das funções $m$ vezes
 continuamente diferenciáveis, e provar um teorema que garanta a existência de
 solução para um problema de valores iniciais envolvendo a equação da onda.
 
 \section{Descrição dos principais resultados}
 
+Em seguida, discutiremos os principais resultados obtidos até o momento de acordo com os estudos realizados.
+Estão separados em área de estudo, organizados na ordem de pesquisa realizada. Apresentamos também
+pequenas descrições e justificativas para o foco em cada uma das áreas citadas.
+
 \subsection{Teorema de existência de solução da equação da onda}
-Nesta subseção, apresentaremos definições bases sobre Equações Diferenciais Parciais (EDP), em específico, a equação da onda e o fundamento teórico
+\paragraph*{}
+Como o resultado que buscamos apresentar no E Encontro Anual de Iniciação Científica,
+Tecnológica e Inovação é relacionado à equação da onda acústica, iniciamos o projeto com o estudo de Equações Diferenciais Parciais (EDPs),
+a qual a equação da onda é um exemplo.
+
+Assim, esta subseção, apresentaremos definições bases relacionadas ao estudo de EDPs, em específico, o fundamento teórico
 necessário para a prova do teorema de existência e unicidade de solução para o problema de valor inicial e de fronteira (PVIF) associado à equação da onda.
 
 
@@ -183,8 +203,8 @@ necessário para a prova do teorema de existência e unicidade de solução para
     para todo $m \geq n \geq N(\epsilon)$ e para todo $x \in I$.
 \end{mydef}
 
-\begin{mytheo}
-    \textbf{Teste M de Weierstrass:} Seja $\sum_{n=1}^{\infty}u_{n}(x)$ uma série de funções $u_{n}: I \to \mathbb{R}$ definidas em um subconjunto $I$ de $\mathbb{R}$. Suponha que existam constantes $M_{n}$ tais que
+\begin{mytheo}[Teste M de Weierstrass]
+    Seja $\sum_{n=1}^{\infty}u_{n}(x)$ uma série de funções $u_{n}: I \to \mathbb{R}$ definidas em um subconjunto $I$ de $\mathbb{R}$. Suponha que existam constantes $M_{n}$ tais que
     \begin{equation}
         |u_{n}(x)| \leq M_{n}|, \qquad \text{para todo  }x \in I,
     \end{equation}
@@ -226,8 +246,8 @@ necessário para a prova do teorema de existência e unicidade de solução para
     Uma função $f: \mathbb{R} \to \mathbb{R}$ é \textit{seccionalmente diferenciável} se ela for seccionalmente contínua e se a sua derivada $f'$ for seccionalmente contínua.
 \end{mydef}
 
-\begin{mytheo}
-    \textbf{Teorema de Fourier:} Seja $f: \mathbb{R} \to \mathbb{R}$ uma função seccionalmente diferenciável de período $2L$. Então, a série de Fourier de $f$ converge em cada ponto $x$ para
+\begin{mytheo}[Teorema de Fourier]
+    Seja $f: \mathbb{R} \to \mathbb{R}$ uma função seccionalmente diferenciável de período $2L$. Então, a série de Fourier de $f$ converge em cada ponto $x$ para
     \begin{equation}
         \lim_{h \to 0} \frac{1}{2}[f(x+h) + f(x-h)]
     \end{equation}
@@ -271,16 +291,16 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 \end{prop}
 
-\begin{prop}
-    \textbf{Desigualdade de Bessel:} Seja $f: \mathbb{R} \to \mathbb{R}$ uma função quadrado integrável em $[-L, L]$ (ou seja, $\int_{-L}^{L} | f(x) | \, dx $ exista).
+\begin{prop}[Desigualdade de Bessel]
+    Seja $f: \mathbb{R} \to \mathbb{R}$ uma função quadrado integrável em $[-L, L]$ (ou seja, $\int_{-L}^{L} | f(x) | \, dx $ exista).
     e $a_n, b_n$ sejam seus coeficientes de Fourier. Então
     \begin{equation}
         \frac{1}{2}a^{2}_{n} + \sum_{n=1}^{\infty}(a^{2}_{n} + b^{2}_{n}) \leq \frac{1}{L}\int_{-L}^{L} | f(x) |^{2} \, dx
     \end{equation}
 \end{prop}
 
-\begin{mytheo}
-    \textbf{Teorema de existência de solução da equação da onda:} Dado o problema de valor inicial e de contorno
+\begin{mytheo}[Teorema de existência de solução da equação da onda]
+    Dado o problema de valor inicial e de contorno
     \begin{equation*}
         \begin{cases}
             u_{tt} = c^{2}u_{xx}, & \text{em } \mathbb{R}      \\
@@ -314,7 +334,9 @@ necessário para a prova do teorema de existência e unicidade de solução para
 
 
 \subsection{Cardinalidade de conjuntos}
-
+\paragraph*{}
+Dado o estudo específico sobre a equação da onda, iniciamos com uma fundamentação teórica em Análise Real, seguindo Lima (1976) como referência principal.
+Isso se deve ao fato de que a equação da onda é uma equação diferencial parcial de segunda ordem, e, para a resolução de tal equação, é necessário o estudo de séries de Fourier.
 
 Nesta subseção, definiremos os conceitos de conjuntos finitos e infinitos, e apresentaremos os conceitos de cardinalidade de conjuntos e, com isso, a distinção
 entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremos como partida o conjunto dos números naturais $\mathbb{N}$.
@@ -322,7 +344,7 @@ entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremo
 \vskip 0.5cm
 
 \begin{mydef}
-    Dada um conjunto $\mathbb{N}$ e uma função $s:\mathbb{N} \to \mathbb{N}$, chamamos os elementos
+    Dado um conjunto $\mathbb{N}$ e uma função $s:\mathbb{N} \to \mathbb{N}$, chamamos os elementos
     desse conjunto de números naturais se, e somente se, $s$ satisfaz os seguintes axiomas \textit{(chamados Axiomas de Peano)}
     \begin{enumerate}
         \item $s: \mathbb{N} \to \mathbb{N}$ é uma função injetora.
@@ -360,8 +382,8 @@ entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremo
     \end{itemize}
 \end{mytheo}
 
-\begin{mytheo}
-    \textbf{Princípio da boa-ordenação} Todo subconjunto não vazio $A \subset \mathbb{N}$ possui um menor elemento.
+\begin{mytheo}[Princípio da boa-ordenação]
+    Todo subconjunto não vazio $A \subset \mathbb{N}$ possui um menor elemento.
 \end{mytheo}
 
 \begin{mydef}
@@ -415,9 +437,11 @@ entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremo
 
 
 \subsection{Números reais}
+\paragraph*{}
+Dando sequência nos estudos de Análise Real, tocamos em seu pilar fundamental, o corpo dos números reais.
 
 Nesta subseção, exibiremos as definições de corpo, corpo ordenado e corpo ordenado completo, e, em seguida,
-exibiremos um axioma que garante a existência de um corpo ordenado completo, chamado de corpo dos números reais, e apresentaremos algumas de suas propriedades
+tomaremos por axioma a existência de um corpo ordenado completo, chamado de corpo dos números reais, e apresentaremos algumas de suas propriedades
 e teoremas relacionados com tal corpo.
 
 \vskip 0.5cm
@@ -447,6 +471,16 @@ e teoremas relacionados com tal corpo.
     Em um corpo ordenado $(K, +, \cdot)$, podemos definir uma relação de ordem $<$ e dizemos que \textit{x é menor que y} se $x<y \iff y - x \in P$.
 \end{mydef}
 
+\begin{mytheo}
+    Em um corpo ordenado $(K, +, \cdot)$, as afirmações são equivalentes:
+    \begin{enumerate}
+        \item $\mathbb{N} \subset K$ é ilimitado superiormente;
+        \item Dados quaisquer $a,b \in K$, com $a>0$, existe $n \in \mathbb{N}$ tal que $n\cdot a > b$;
+        \item Dado qualquer $a \in K$, existe $n \in \mathbb{N}$ tal que $0 < \frac{1}{n} < a$.
+    \end{enumerate}
+
+    Um corpo ordenado que satisfaz qualquer uma das propriedades acima é dito \textit{arquimediano}.
+\end{mytheo}
 
 \begin{mydef}
     Dado um corpo ordenado $(K, +, \cdot)$, definimos como \textit{valor absoluto (ou módulo)} de um elemento $a \in K$ como $|0| =0$ e $|a| = a$ se
@@ -477,19 +511,19 @@ e teoremas relacionados com tal corpo.
 \end{mydef}
 
 \begin{mydef}
-    Tomamos por axioma a existência de um corpo ordenado completo $(\mathbb{R}, +, \cdot)$, chamado de \textit{corpo dos números reais}.
+    Tomamos por \textbf{axioma} a existência de um corpo ordenado completo $(\mathbb{R}, +, \cdot)$, chamado de \textit{corpo dos números reais}.
 \end{mydef}
 
-\begin{mytheo}
-    \textbf{Desigualdade de Bernoulli:} Para todo $x \in \mathbb{R}, x \geq -1$ e todo $n \in \mathbb{N}$, temos que $(1+x)^n \geq 1 + nx$.
-\end{mytheo}
+\begin{prop}[Desigualdade de Bernoulli]
+    Para todo $x \in \mathbb{R}, x \geq -1$ e todo $n \in \mathbb{N}$, temos que $(1+x)^n \geq 1 + nx$.
+\end{prop}
 
-\begin{mytheo}
-    \textbf{Desigualdade triangular:}Se $x,y \in \mathbb{R}$ então $|x+y| \leq |x| + |y|$.
-\end{mytheo}
+\begin{prop}[Desigualdade triangular]
+    Se $x,y \in \mathbb{R}$ então $|x+y| \leq |x| + |y|$.
+\end{prop}
 
-\begin{mytheo}
-    \textbf{Teorema dos subintervalor encaixados:} Dada uma sequência de intervalos limitados e fechados $I_1 \subset I_2 \subset \ldots \subset I_n \subset \ldots$,
+\begin{mytheo}[Teorema dos subintervalor encaixados]
+    Dada uma sequência de intervalos limitados e fechados $I_1 \subset I_2 \subset \ldots \subset I_n \subset \ldots$,
     $I_n = [a_n, b_n]$ então existe um número real $c$ tal que $c \in I_n$ para todo $n \in \mathbb{N}$.
 \end{mytheo}
 
@@ -498,11 +532,16 @@ e teoremas relacionados com tal corpo.
 \end{mytheo}
 
 \subsection{Sequências} \label{sec:seq}
+\paragraph*{}
+
+Agora, com o corpo dos números reais definido, podemos estudar as sequências de números reais e seus limites.
+Tal estudo nos fornecerá as ferramentes necessárias para a compreensão do conceito de limite, funções e continuidade, conceitos
+essenciais na Análise Real para a compreensão das funções nas quais estamos interessados.
+
+Em específico, nos dá o embasamento necessário para a compreensão da noção de derivada mais adiante, na qual a teoria das EDPs se baseia.
 
 Aqui será apresentada a definição de sequência de números reais e a noção de limite em sua forma mais simples, sendo o limite de uma sequência.
 Assim, definiremos os conceitos de sequências convergentes, divergentes e sequências de Cauchy. Em seguida, apresentaremos alguns teoremas relacionados com tais conceitos.
-
-
 \vskip 0.5cm
 
 
@@ -531,8 +570,8 @@ Assim, definiremos os conceitos de sequências convergentes, divergentes e sequ�
     Uma sequência $(x_n)$ é dita \textit{convergente} se existe um número real $a$ tal que $\lim_{n \to \infty} x_n = a$, caso contrário, dizemos que a sequência é \textit{divergente}.
 \end{mydef}
 
-\begin{mytheo}
-    \textbf{Unicidade do limite:} Se a sequência $(x_n)$ é convergente, então o limite é único.
+\begin{mytheo}[Unicidade do limite]
+    Se a sequência $(x_n)$ é convergente, então o limite é único.
 \end{mytheo}
 
 \begin{mydef}
@@ -557,8 +596,8 @@ Assim, definiremos os conceitos de sequências convergentes, divergentes e sequ�
     Toda sequência monótona e limitada é convergente.
 \end{mytheo}
 
-\begin{mytheo}
-    \textbf{Teorema de Bolzano-Weierstrass:} Toda sequência limitada possui uma subsequência convergente.
+\begin{mytheo}[Teorema de Bolzano-Weierstrass]
+    Toda sequência limitada possui uma subsequência convergente.
 \end{mytheo}
 
 \begin{mytheo}
@@ -566,8 +605,8 @@ Assim, definiremos os conceitos de sequências convergentes, divergentes e sequ�
 \end{mytheo}
 
 
-\begin{mytheo}
-    \textbf{Teorema do sanduíche:} Sejam $(x_n), (y_n), (z_n)$ sequências de números reais tais que $x_n \leq y_n \leq z_n$ para $n \in \mathbb{N}$ suficientemente grande.
+\begin{mytheo}[Teorema do sanduíche]
+    Sejam $(x_n), (y_n), (z_n)$ sequências de números reais tais que $x_n \leq y_n \leq z_n$ para $n \in \mathbb{N}$ suficientemente grande.
     Se $\lim x_n = \lim z_n = a$, então $\lim y_n = a$.
 \end{mytheo}
 
@@ -592,10 +631,15 @@ Assim, definiremos os conceitos de sequências convergentes, divergentes e sequ�
 \end{mytheo}
 
 \subsection{Topologia na reta}
+\paragraph*{}
 
-Em seguida, apresentaremos conceitos básicos relacionados à topologia dos números reais. A topologia é uma área da matemática que estuda as propriedades de conjuntos.
-Dessa forma, definiremos conceitos como conjuntos abertos, fechados, ponto interior, ponto aderente, ponto de acumulação, vizinhança e conjuntos compactos.
+Com a bagagem teórica sobre sequências de números reais, podemos avançar para o estudo do conceito de topologia no corpo dos números reais.
+A topologia é uma área da matemática que estuda as propriedades de conjuntos bem como, de forma geral, as noções de limite e de continuidade.
 
+Dessa forma, apresentaremos em seguida conceitos básicos relacionados à topologia dos números reais;
+definiremos conceitos como conjuntos abertos, fechados, ponto interior, ponto aderente, ponto de acumulação, vizinhança e conjuntos compactos.
+
+\vskip 0.5cm
 
 \begin{mydef}
     Dado um conjunto $X \subset \mathbb{R}$, um ponto $a \in X$ é dito ponto interior de $X$ quando existe $\epsilon >0$ tal que
@@ -661,8 +705,14 @@ Dessa forma, definiremos conceitos como conjuntos abertos, fechados, ponto inter
 \end{mytheo}
 
 \subsection{Limites de funções}
-
+\paragraph*{}
 Finalmente, expandiremos o conceito de limite apresentado na seção \ref{sec:seq} para funções reais de variável real.
+
+Separamos em uma subseção própria, pois o conceito de limite de funções é essencial para a noção de continuidade e derivada de funções reais,
+ideias fundamentais para a compreensão das equações diferenciais parciais.
+
+Portanto, exploraremos aqui a definção de limite de funções, que se difere levemente do limite de uma sequência, e os principais teoremas relacionados a
+existência e comportamento de uma ou mais funções.
 
 \vskip 0.5cm
 
@@ -682,8 +732,8 @@ Finalmente, expandiremos o conceito de limite apresentado na seção \ref{sec:se
     $x \in X, 0 < |x-a| < \delta \implies f(x) < g(x)$.
 \end{mytheo}
 
-\begin{mytheo}
-    \textbf{Teorema do sanduíche para funções:} Sejam $f,g,h: X \to \mathbb{R}, a \in X'$ e $\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L$.
+\begin{mytheo}[Teorema do sanduíche para funções]
+    Sejam $f,g,h: X \to \mathbb{R}, a \in X'$ e $\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L$.
     Se $f(x) \leq g(x) \leq h(x)$ para $x \in X\backslash\{a\}$, então $\lim_{x \to a} g(x) = L$.
 \end{mytheo}
 
@@ -692,8 +742,8 @@ Finalmente, expandiremos o conceito de limite apresentado na seção \ref{sec:se
     $\lim x_n = a$, tem-se $\lim f(x_n) = L$.
 \end{mytheo}
 
-\begin{mytheo}
-    \textbf{Unicidade do limite:} Sejam $f: X \to \mathbb{R}, a \in X'$. Se $\lim_{x \to a} f(x) = L$ e $\lim_{x \to a} f(x) = M$, então $L = M$.
+\begin{mytheo}[Unicidade do limite]
+    Sejam $f: X \to \mathbb{R}, a \in X'$. Se $\lim_{x \to a} f(x) = L$ e $\lim_{x \to a} f(x) = M$, então $L = M$.
 \end{mytheo}
 
 \begin{mytheo}
@@ -701,4 +751,13 @@ Finalmente, expandiremos o conceito de limite apresentado na seção \ref{sec:se
     Ou seja, existem $M > 0$ e $\delta > 0$ tal que $x \in X, 0 < |x-a| < \delta \implies |f(x)| \leq M$.
 \end{mytheo}
 
+\subsection{Considerações}
+\paragraph*{}
+Destarte, foi trabalhado até o momento a fundamentação básica da Análise Real, com conceitos de sequências, limites, funções e topologia na reta.
+Tais noções servirão como baluarte para os estudos que seguem, cada vez mais se aproximando ao cerne buscado: A resolução da equação diferencial
+parcial que descreve o comportamento de uma onda acústica.
+
+Em seguida, trabalharemos a teoria relaciona à funções contínuas e então passaremos para o estudo de espaços métricos. Por último,
+abordaremos a teoria física que fundamenta o comportamento de ondas acústicas, a equação da onda, e a resolução de tal equação por meio de séries de Fourier a
+fim de encaixá-la nos moldes do \textbf{Teorema de existência de solução da equação da onda}, no qual garantiu-se a existência de solução.
 \end{document}
