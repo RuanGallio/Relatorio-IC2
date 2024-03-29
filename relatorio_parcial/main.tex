@@ -2,6 +2,7 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage{adjustbox}
 \usepackage[T1]{fontenc}
+\usepackage{cancel}
 \usepackage[brazilian]{babel}
 \usepackage{amsthm}
 \usepackage{amsmath} % Import the amsmath package for \text
@@ -10,6 +11,7 @@
 
 \newcounter{definition}[subsection]
 \newenvironment{mydef}{%
+  \par\addvspace{\topsep}
   \noindent
   \refstepcounter{definition}%
   \textbf{Definição \thesubsection.\thedefinition. }%
@@ -18,8 +20,18 @@
   \par\addvspace{\topsep}
 }
 
+\newenvironment{axiom}{%
+  \par\addvspace{\topsep}
+  \noindent
+  \textbf{Axioma. }%
+  \ignorespaces
+}{%
+  \par\addvspace{\topsep}
+}
+
 \newcounter{theorem}[subsection]
 \newenvironment{mytheo}[1][]{%
+    \par\addvspace{\topsep}
     \noindent
     \stepcounter{theorem}%
     \ifstrempty{#1}%
@@ -53,10 +65,12 @@
 }
 
 
-% make a demonstration environment. Add black square at the end of the demonstration
 \newenvironment{demonstration}{%
   \par\addvspace{\topsep}
+  \noindent
   \textbf{Demonstração. }%
+
+
   \ignorespaces
 }{%
   \par\addvspace{\topsep}
@@ -81,7 +95,10 @@
     \textbf{\large COORDENAÇÃO LOCAL DO PROGRAMA DE INICIAÇÃO CIENTÍFICA}
 \end{flushleft}
 
-\vspace{1cm}
+
+\begin{center}
+    \Large \bf Anexo I
+\end{center}
 
 \section{Descrição do projeto}
 
@@ -180,6 +197,12 @@ a qual a equação da onda é um exemplo.
 Assim, esta subseção, apresentaremos definições bases relacionadas ao estudo de EDPs, em específico, o fundamento teórico
 necessário para a prova do teorema de existência e unicidade de solução para o problema de valor inicial e de fronteira (PVIF) associado à equação da onda.
 
+Iniciamos com o nosso de objeto de estudo básico ao trabalharmos com a equação da onda,
+uma função periódica. Definiremos tal conceito e apresentaremos demais definições e teoremas, principalmente relacionados
+a séries de funções e sua convergência uniforme, os quais utilizaremos para a prova do teorema
+principal, o qual estabelece a existência de solução para o PVIF da equação da onda.
+
+\vskip 0.5cm
 
 \begin{mydef}
     Uma função $f: \mathbb{R} \to \mathbb{R}$ é \textit{periódica} de período $T$ se, e somente se, $f(x + T) = f(x)$ para todo $x \in \mathbb{R}$.
@@ -206,11 +229,14 @@ necessário para a prova do teorema de existência e unicidade de solução para
 \begin{mytheo}[Teste M de Weierstrass]
     Seja $\sum_{n=1}^{\infty}u_{n}(x)$ uma série de funções $u_{n}: I \to \mathbb{R}$ definidas em um subconjunto $I$ de $\mathbb{R}$. Suponha que existam constantes $M_{n}$ tais que
     \begin{equation}
-        |u_{n}(x)| \leq M_{n}|, \qquad \text{para todo  }x \in I,
+        |u_{n}(x)| \leq M_{n}, \qquad \text{para todo  }x \in I,
     \end{equation}
 
     e que a série numérica $\sum_{n=1}^{\infty}M_{n}$ convirja. Então a série de funções  $\sum_{n=1}^{\infty}u_{n}(x)$ tem convergência uniforme em $I$.
 \end{mytheo}
+
+Em seguida, apresentamos o conteceito de série de Fourier, o qual servirá como ferramenta para a solução base
+do problema de valor inicial e de fronteira (PVIF) associado à equação da onda.
 
 \begin{mydef}
     Dada uma função $f: \mathbb{R} \to \mathbb{R}$, periódica, de período $2L$, integrável e absolutamente integrável, podemos expressá-la como uma \textit{série de Fourier}
@@ -240,6 +266,8 @@ necessário para a prova do teorema de existência e unicidade de solução para
             u_t(x, 0) = g(x),     & \text{em } 0 \leq x \leq L
         \end{cases}
     \end{equation}
+
+    A solução desse problema é aqui omitida mas pode ser encontrada em Boyce e Diprima (2012).
 \end{mydef}
 
 \begin{mydef}
@@ -299,6 +327,10 @@ necessário para a prova do teorema de existência e unicidade de solução para
     \end{equation}
 \end{prop}
 
+Finalmente, encerramos esta subseção com o enunciado do teorema que garante a existência de solução para uma equação de onda com condições de contorno e de fronteira
+enunciadas anteriormente. Tal teorema é um dos resultados principais do projeto e será apresentado no Encontro Anual de Iniciação Científica, Tecnológica e Inovação
+bem como sua demonstração.
+
 \begin{mytheo}[Teorema de existência de solução da equação da onda]
     Dado o problema de valor inicial e de contorno
     \begin{equation*}
@@ -330,6 +362,8 @@ necessário para a prova do teorema de existência e unicidade de solução para
               \end{equation}
               onde $u(x,t)$ é uma função contínua em $\mathbb{R}$, de classe $C^{2}$.
     \end{enumerate}
+
+    A demonstração deste teorema está sendo elaborada e constará no relatório final.
 \end{mytheo}
 
 
@@ -340,6 +374,8 @@ Isso se deve ao fato de que a equação da onda é uma equação diferencial par
 
 Nesta subseção, definiremos os conceitos de conjuntos finitos e infinitos, e apresentaremos os conceitos de cardinalidade de conjuntos e, com isso, a distinção
 entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremos como partida o conjunto dos números naturais $\mathbb{N}$.
+
+Dessa forma, enunciamos incialmente os \textit{axiomas de Peano}  do qual toda a construção do conjunto dos números naturais decorre.
 
 \vskip 0.5cm
 
@@ -390,6 +426,8 @@ entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremo
     Definimos como o conjunto de inteiros menores ou iguais a $n$ como $I_n = \{ p \in \mathbb{N}; p \leq n \}$.
 \end{mydef}
 
+Assim, dada a construção dos números naturais, podemos estudar conjuntos mais gerais, se são finitos ou infinitos, e, em caso de serem finitos, se são enumeráveis ou não: sua cardinalidade.
+
 \begin{mydef}
     Um conjunto $X$ é dito finito se é vazio ou, então, se existe uma função bijetora $f: I_n \to X$.
     A bijeção $f$ chama-se \textit{contagem} de $X$ e o número $n$ chama-se \textit{número de elementos} ou \textit{número cardinal} de $X$.
@@ -438,12 +476,10 @@ entre conjuntos numeráveis e não numeráveis. Para tal, definiremos e tomaremo
 
 \subsection{Números reais}
 \paragraph*{}
-Dando sequência nos estudos de Análise Real, tocamos em seu pilar fundamental, o corpo dos números reais.
+Dando sequência nos estudos de Análise Real, tocamos em seu baluarte central, o corpo dos números reais.
 
-Nesta subseção, exibiremos as definições de corpo, corpo ordenado e corpo ordenado completo, e, em seguida,
-tomaremos por axioma a existência de um corpo ordenado completo, chamado de corpo dos números reais, e apresentaremos algumas de suas propriedades
-e teoremas relacionados com tal corpo.
-
+Dessa forma, iniciamos com a definição de corpo sob a qual iremos construindo os números reais: definindo um corpo odernado,
+um corpo arquimediano e corpo ordenado completo.
 \vskip 0.5cm
 
 \begin{mydef}
@@ -510,9 +546,13 @@ e teoremas relacionados com tal corpo.
     Dado um corpo ordenado $(K, +, \cdot)$, dizemos que tal corpo é \textit{completo} se, e somente se, todo subconjunto não vazio $A \subset K$ que é limitado superiormente possui um supremo.
 \end{mydef}
 
-\begin{mydef}
-    Tomamos por \textbf{axioma} a existência de um corpo ordenado completo $(\mathbb{R}, +, \cdot)$, chamado de \textit{corpo dos números reais}.
-\end{mydef}
+Nota-se que apenas definimos um corpo ordenado e completo, sobre o qual mostraremos algumas propriedades.
+No entanto, a \textit{existência} de um corpo que cumpre essas propriedades não é garantida, mas sim, no presente trabalho,
+tomada por axioma.
+
+\begin{axiom}
+    Existe um corpo ordenado completo $(\mathbb{R}, +, \cdot)$, chamado de \textit{corpo dos números reais}.
+\end{axiom}
 
 \begin{prop}[Desigualdade de Bernoulli]
     Para todo $x \in \mathbb{R}, x \geq -1$ e todo $n \in \mathbb{N}$, temos que $(1+x)^n \geq 1 + nx$.
@@ -555,6 +595,9 @@ Assim, definiremos os conceitos de sequências convergentes, divergentes e sequ�
 
     Analogamente, definimos uma sequência \textit{limitada inferiormente}.
 \end{mydef}
+
+Dada a definção de uma sequência, passamos para sua propriedade de maior interesse para a Análise Real:
+a noção de limite e convergência.
 
 \begin{mydef}
     Dizemos que o número real $a$ é limite da sequência $(x_n)$ se, e somente se, para todo $\epsilon > 0$ existe $N \in \mathbb{N}$ tal que
@@ -639,6 +682,9 @@ A topologia é uma área da matemática que estuda as propriedades de conjuntos 
 Dessa forma, apresentaremos em seguida conceitos básicos relacionados à topologia dos números reais;
 definiremos conceitos como conjuntos abertos, fechados, ponto interior, ponto aderente, ponto de acumulação, vizinhança e conjuntos compactos.
 
+Tais conceitos são de suma importância para o estudo de funções reais e de EDPs, pois nos garantem propriedade sobre o espaço de domínio das funções
+e restrições sobre as quais as funções são definidas.
+
 \vskip 0.5cm
 
 \begin{mydef}
@@ -651,6 +697,10 @@ definiremos conceitos como conjuntos abertos, fechados, ponto interior, ponto ad
 \begin{mydef}
     Um conjunto $X \subset \mathbb{R}$ é dito \textit{aberto} se todo ponto de $X$ é um ponto interior de $X$. Ou seja, $X = \text{int}(X)$.
 \end{mydef}
+
+
+Agora, nota-se a importância do estudo na subseção anterior sobre sequências de números reais, pois o conceito de ponto de acumulação e de ponto aderente
+estão diretamente relacionados com o conceito de limite de uma sequência.
 
 \begin{mydef}
     Dado $X \subset \mathbb{R}$ e $a \in X$, dizemos que $a$ é ponto aderente de $X$ se, e somente se, $\exists (x_n) \subset X$ tal que $\lim x_n = a$.
